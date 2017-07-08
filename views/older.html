@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- 主体 -->
+    <div class="item">
+        <!-- 日期分类 -->
+        <div class="mark">{{items.date|date:"dd MMM"}}</div>
+        <ul class="posts">
+            <!-- 文章 -->
+            <!-- 填充后台获取的数据 -->
+            <li ng-repeat="post in items.posts">
+            	<!-- 所有响应数据应在item中查找属性,得到属性值 -->
+            	<!-- 在控制器打印出数据,查找响应信息 -->
+            	<!-- 鼠标停留会得到属性名,这样不容易出错 -->
+            	<!-- 当span为空,直接去掉该节点ng-if -->
+                <span href="javascript:;" class="tag" ng-if="post.column.name">{{post.column.name}}</span>
+                <div class="cont">
+                    <h3>{{post.title}}</h3>
+                    <!-- 三种可能:纯文字、文字+图片、纯图片 -->
+                    <!-- 数据研究发现post.display_style判断三种模式,分别为10001、10002、10003 -->
+                    <!-- 10001纯文字:p.only -->
+                    <!-- 10002文字+图片:p、div.thumb -->
+                    <!-- 10003纯图片:div.gallery -->
+                    <div class="brief">
+                        <p ng-class="{only:post.display_style==10001}" ng-if="post.display_style!=10003">{{post.abstract}}</p>
+                        <div class="thumb" ng-if="post.display_style==10002">
+                        	<img src="{{post.thumbs[0].small.url}}" alt="">
+                        </div>
+                         <div class="gallery row" ng-if="post.display_style==10003" ng-repeat="img in post.thumbs">
+                         <div class="img-box">
+                                <img src="{{img.small.url}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

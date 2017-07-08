@@ -5,47 +5,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>豆瓣一刻</title>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="./less/main.css">
+	<link rel="stylesheet" href="./public/less/main.css">
 </head>
-<body>
+<!-- 需要添加应用模块 -->
+<body ng-app="yike">
 	<div class="viewport">
 		<!-- 侧边导航 -->
-		<div class="navs">
-			<dl>
+		<div ng-class="{navs:true,collapse:collapsed}">
+			<!-- 添加左侧导航栏的控制器navCon -->
+			<dl ng-controller="navCon">
 				<dt class="login">
 					<div class="avatar">
-						<img src="./images/avatar.png" alt="">
+						<img src="./public/images/avatar.png" alt="">
 					</div>
 					<span>登录</span>
 				</dt>
-				<dd class="active">
-					<a href="./index.html" class="icon-home">
-						<span>今日一刻</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./older.html" class="icon-file-empty">
-						<span>往期内容</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./author.html" class="icon-pencil">
-						<span>热门作者</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./category.html" class="icon-menu">
-						<span>栏目浏览</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./favourite.html" class="icon-heart">
-						<span>我的喜欢</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./settings.html" class="icon-cog">
-						<span>设置</span>
+				<!-- active是点击时变色,默认第一个 -->
+				<!-- 后面要设置点击哪个,哪个变色 -->
+				<dd ng-class="{active:key == index}" ng-repeat="(key,nav) in navs">
+					<!-- 点击左侧导航栏会触发header部分一样的滑动效果 -->
+					<a href={{nav.link}} class={{nav.icon}} ng-click="toggle()">
+						<span>{{nav.text}}</span>
 					</a>
 				</dd>
 			</dl>
@@ -56,104 +36,33 @@
 		</div>
 		<div class="container">
 			<!-- 头部 -->
-			<div class="header">
+			<div  ng-class="{header:true,collapse:collapsed}" ng-click="toggle()">
 				<a href="javascript:;" class="menu icon-menu"></a>
-				<h2>今日一刻</h2>
+				<!-- 点击对应的左侧导航,header切换对应的大标题 -->
+				<!-- 在点击事件中,获取点击对象的内容 -->
+				<!-- 主页时,没有任何点击事件,需要初始化一下内容 -->
+				<h2>{{title}}</h2>
 				<a href="javascript:;" class="search icon-search"></a>
 			</div>
 			<!-- 主体 -->
-			<div class="body">
-				<div class="item">
-					<!-- 日期分类 -->
-					<div class="mark">13Aug</div>
-					<ul class="posts large">
-						<!-- 文章 -->
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源</h3>
-								<div class="brief">
-									<p class="only">那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清中钻洞是为了洗清那里有个很窄的洞，钻进去曾是莲花生大师修行的地方</p>
-								</div>							
-							</div>
-						</li>
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源探索藏文化之源</h3>
-								<div class="brief">
-									<p>那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清</p>
-									<div class="thumb">
-										<img src="./uploads/post_1.png" alt="">
-									</div>
-								</div>							
-							</div>
-						</li>
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源</h3>
-								<div class="brief">
-									
-									<div class="gallery">
-										<img src="./uploads/post_2.png" alt="">
-									</div>
-								</div>							
-							</div>
-						</li>
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源探索藏文化之源</h3>
-								<div class="brief">
-									<p>那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清</p>
-									<div class="thumb">
-										<img src="./uploads/post_1.png" alt="">
-									</div>
-								</div>							
-							</div>
-						</li>
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源探索藏文化之源</h3>
-								<div class="brief">
-									<p>那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清</p>
-									<div class="thumb">
-										<img src="./uploads/post_1.png" alt="">
-									</div>
-								</div>							
-							</div>
-						</li>
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源探索藏文化之源</h3>
-								<div class="brief">
-									<p>那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清</p>
-									<div class="thumb">
-										<img src="./uploads/post_1.png" alt="">
-									</div>
-								</div>							
-							</div>
-						</li>
-						<li>
-							<span href="javascript:;" class="tag">去远方</span>
-							<div class="cont">
-								<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源探索藏文化之源</h3>
-								<div class="brief">
-									<p>那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清</p>
-									<div class="thumb">
-										<img src="./uploads/post_1.png" alt="">
-									</div>
-								</div>							
-							</div>
-						</li>
-					</ul>
-				</div>
+			<div ng-class="{body:true,collapse:collapsed}">
+			<!-- 加载等待总会有一个加载图片,因为是body部分加载时空白,应该在这里放入加载图片 -->
+				<!-- 在浏览器中查找设置样式的文件main.css设置图片样式 -->
+				<!-- 由于img有通用设置,这里需要给它一个属性名 -->
+				<!-- 当加载完成需要消失,则是请求数据的地方设置 -->
+				<img ng-hide="loaded" class="loading" src="./public/images/load_gif1.gif">
+				<!-- <div loading ng-hide="loaded" src="public/images/load_gif (2).gif"><div> -->
+				<div ng-view></div>
 			</div>
 		</div>
 	</div>
-	<script src="./libs/toggle.js"></script>
+	<!-- <script src="./public/libs/toggle.js"></script> -->
+	<!-- 项目使用AngularJs开发,要引入文件 -->
+	<!-- html页面作为一个主页面,其余数据都是通过路由匹配填充视图 -->
+	<script type="text/javascript" src="./public/libs/angular.min.js"></script>
+	<script type="text/javascript" src="./public/libs/angular-route.js"></script>
+	<script type="text/javascript" src="./scripts/app.js"></script>
+	<!-- 存放所有控制器的js文件 -->
+	<script type="text/javascript" src="./scripts/controllers.js"></script>
 </body>
 </html>

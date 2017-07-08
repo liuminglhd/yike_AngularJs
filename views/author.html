@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <dl class="author">
+        <dt>本周推荐</dt>
+        <dd ng-repeat="author in items.rec.authors">
+            <a href="#/author/center" ng-click="authorCen()">
+                <div class="avatar">
+                    <!-- 上传的头像 -->
+                    <img class="circle" src={{author.avatar}} alt="">
+                </div>
+                <div class="info">
+                    <!-- 作者的名字 -->
+                    <h5>{{author.name}}</h5>
+                    <!-- 作者的语句 -->
+                    <p>{{author.editor_notes}}</p>
+                </div>
+            </a>
+        </dd>
+        <dt>热门作者</dt>
+         <dd ng-repeat="author in items.all.authors">
+            <a href="#/author/center" ng-click="authorCen()">
+                <div class="avatar">
+                    <img class="circle" src={{author.avatar}} alt="">
+                </div>
+                <div class="info">
+                    <h5>{{author.name}}</h5>
+                    <p>{{author.editor_notes}}</p>
+                </div>    
+            </a>
+        </dd>
+    </dl>
+</body>
+
+</html>
